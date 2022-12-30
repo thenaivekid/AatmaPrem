@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    {% block title %}
+
+    {% endblock %}
+  </title>
+  <link rel="stylesheet" type="text/css" href="{% static 'deepdive/style.css' %}">
+  <script type="text/javascript" src="{% static 'deepdive/anil.js' %}"></script>
+</head>
+
+<body>
+  <div class=box1>
+    <header class="header">
+      <nav class="nav">
+        <img
+          src="https://images.unsplash.com/photo-1669701843235-5f385642b7d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
+          class="image">
+        <a href="/website" class="logo">
+          Navbar
+        </a>
+        <ul id='navlink' class="navlink">
+          <li><a href="/website">HOME</a></li>
+          <li><a href="/course">COURSES</li>
+          <li><a href="/about">ABOUT</li>
+          <li><a href="/contact">CONTACT</a></li>
+        </ul>
+        <div id="menu" onclick="openmenu()"><i class="bi bi-list"></i>
+      </nav>
+      <div>
+        <img
+        src="https://images.unsplash.com/photo-1669701843235-5f385642b7d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
+        class="photo">
+      </div>
+      
+    </header>
+
+  {% block body %} 
+
+  {% endblock %}
+
+  </div>
+  <footer>
+    
+    <div>
+      <i class="bi bi-facebook"></i>
+      <i class="bi bi-linkedin"></i>
+      <i class="bi bi-youtube"></i>
+    </div>
+
+    <div>All right reserved.</div>
+  </footer>
+  
+  {% block script %}
+
+  {% endblock %}
+</body>
+
+</html>

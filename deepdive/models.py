@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class PostItem(models.model):
+class PostItem(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     content = models.CharField(max_length=256)
     completed = models.BooleanField(default=False)

@@ -1,0 +1,186 @@
+* {
+    padding: 0px;
+    margin: 0px;
+  }
+  body {
+    background-color: lightpink;
+  }
+
+  .box{
+    padding: 30px;
+  }
+  
+  .nav {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    margin-right: 0px;
+    background-color: rgb(45, 79, 45);
+  }
+  #navlink {
+    padding-right: 300px;
+  }
+  
+  .image {
+    height: 50px;
+    margin-left: 200px;
+  }
+  .photo {
+    height:100px;
+    width:100px;
+    margin-left: 200px;
+    border: solid;
+    border-radius: 50%;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+  }
+  .photo:hover {
+    transform: scale(1.5);
+  }
+  
+  .logo {
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    padding: 20px;
+  }
+  
+  .nav ul {
+    flex: 1;
+    text-align: right;
+    margin-bottom: 0px;
+  }
+  .nav ul li {
+    display: inline;
+    margin-left: 50px;
+    border-bottom: solid 3px transparent;
+    border-radius: 2px;
+  }
+  .nav ul li:hover {
+    border-bottom: solid 3px rgb(52, 99, 52);
+  }
+  .nav ul a {
+    text-decoration: none;
+    color: white;
+  }
+  #menu {
+    display: none;
+    position: absolute;
+    right: 20px;
+    font-size: 20px;
+  }
+  .textBox {
+    color: white;
+    background-color: rgb(133, 188, 133);
+    display: flex;
+    margin: 30px 0px;
+    padding: 30px 0px;
+    flex-direction: column;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .textBox:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .box2 {
+    margin-top: 30px;
+  }
+  form div {
+    display: flex;
+    flex-direction: column;
+  }
+  form {
+    text-align: center;
+    align-items: center;
+  }
+  form input {
+    font-size: 20px;
+    border-radius: 20px;
+    border: solid 3px white;
+  }
+  .button {
+    color: green;
+    border: solid 2px white;
+    font-size: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+    padding: 2px 20px;
+  }
+  .button:hover {
+    color: white;
+    background-color: green;
+  }
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 200px;
+    background-color: rgb(162, 209, 162);
+  }
+  footer div {
+    margin-top: 30px;
+  }
+  footer div i {
+    margin-left: 30px;
+  }
+  footer div i:hover {
+    color: green;
+  }
+  
+  @media (max-width: 1000px) {
+    .navlink {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 0px;
+      height: 100%;
+      background-color: purple;
+      padding-top: 30px;
+      display: none;
+    }
+    .photo {
+      height: 60px;
+      width: 60px;
+      margin-left: 0px;
+      border: solid;
+      border-radius: 50%;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+    }
+    .nav ul li {
+      display: block;
+      padding-top: 30px;
+      text-align: left;
+      color: black;
+    }
+    .nav ul li {
+      border-bottom: none;
+    }
+    .nav ul li:hover {
+      border-bottom: none;
+    }
+    #menu {
+      display: block;
+    }
+    .menuresponsive {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 0px;
+      height: 100%;
+      background-color: purple;
+      padding-top: 30px;
+      display: block;
+    }
+    li a {
+      color: white;
+      display: block;
+    }
+  }
+  

@@ -4,9 +4,11 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
+
+
 from .models import Post,PostItem,AnalyzingPeople
 def index(request):
-    posts = Post.objects.get().all()
+    posts = Post.objects.all()
     return render(request,"deepdive/index.html",{
         "posts" : posts,
     })
