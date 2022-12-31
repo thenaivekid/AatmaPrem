@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from .models import Post,PostItem
+from .models import Post,PostItem,AnalyzingPeople
 # Register your models here.
 
 admin.site.register(Post)
 admin.site.register(PostItem)
+admin.site.register(AnalyzingPeople)

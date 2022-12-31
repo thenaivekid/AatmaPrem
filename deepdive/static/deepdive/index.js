@@ -10,8 +10,12 @@ function addItemForm(postId){
     content.type = "text";
     content.class = "textinput"
     content.required = true
+    content.focus()
     content.id = `content${postId}`;
     form.appendChild(content);
+
+    br = document.createElement('br');
+    form.appendChild(br);
 
     var btn = document.createElement('button');
     btn.type = "submit";
@@ -50,22 +54,27 @@ function saveItem(postId){
     })
         .then(response => response.json())
         .then(result => {
-            console.log(result.message);})
+            console.log(result.message);
 
+        document.getElementById(`addbtn${postId}`).style.display = 'block';
+        document.getElementById(`itemForm${postId}`).remove();
 
-    document.querySelector(`#addbtn${postId}`).style.display = 'block';
-    document.querySelector(`#itemForm${postId}`).style.display = 'none';
-    
-    var itemDiv = document.querySelector(`#notCompletedItem${postId}`);
-    var item = document.createElement('div')
-    item.innerText = `${content}`;
-    itemDiv.appendChild(item);
-
+        itemDiv = document.getElementById(`notCompletedItem${postId}`);
+        if (itemDiv === null){
+            itemDiv = document.createElement('div')
+            itemDiv.id = `#notCompletedItem${postId}`;
+            document.getElementById(`items${postId}`).appendChild(itemDiv);
+        }
+        item = document.createElement('div')
+        item.id = `item${result.id}`
+        item.innerHTML = `${content}<button id="doneBtn${result.id}" class="button" onclick="completed(${result.id},${postId})">Done</button>`;
+        itemDiv.appendChild(item);
+        })
 
 }
 
 
-function completed(itemId){
+function completed(itemId,postId){
     console.log(`completed${itemId}`)
     let csrftoken = document.cookie;
     const actualToken=csrftoken.split('=')[1]
@@ -83,10 +92,49 @@ function completed(itemId){
             console.log(result.message);})
 
 
-    document.querySelector(`#item${itemId}`).style.display = 'none';
-    
-    var itemDiv = document.querySelector(`#notCompletedItem${itemId}`);
-    var item = document.createElement('div')
-    item.innerHTML = `${content}<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.2L4.8 12L9 7.8L6.6 5.4L5.4 6.6L9 10.2L15.6 3.6L16.8 4.8L9 16.2Z" fill="#00C853"/></svg>`;
-    itemDiv.appendChild(item);
+    itemDiv = document.querySelector(`#doneBtn${itemId}`).style.display = 'none';
+
 }
+
+
+//save new post
+document.querySelector('#newPostForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    console.log('form submitted');
+    title = document.querySelector("#newPostTitle").value;
+    if (title.trim() === "") {
+        alert("The input field is required!");
+        return
+    }
+    desc = document.querySelector("#newPostDesc").value;
+    image = document.querySelector("#newPostImage").value;
+    page = document.querySelector("#newPostcategory").value.trim();
+    console.log(page)
+    
+    let csrftoken = document.cookie;
+    const actualToken=csrftoken.split('=')[1]
+    fetch('/create_post', {
+        method: 'POST',
+        headers: {
+            "X-CSRFToken": actualToken
+        },
+        body: JSON.stringify({
+            title: title,
+            desc: desc,
+            image:image,
+            page:page
+        })
+    })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result.message);
+        })
+    div = document.createElement('div');
+    div.innerHTML =`<h5>Refresh to view new post.</h5>`;
+    document.querySelector('#newPost').appendChild(div);
+    //clears the fields
+    document.querySelector("#newPostTitle").value = '';
+    document.querySelector("#newPostDesc").value = '';
+    document.querySelector("#newPostImage").value = '';
+  });
+  

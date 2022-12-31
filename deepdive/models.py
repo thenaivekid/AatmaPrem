@@ -10,21 +10,20 @@ class PostItem(models.Model):
     content = models.CharField(max_length=256)
     completed = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.content
+
 
 class Post(models.Model):
     title = models.CharField(max_length=32)
     desc = models.CharField(max_length=1024)
+    image = models.CharField(max_length=128,default='https://img.freepik.com/premium-vector/king-crown-esport-logo-design_177315-269.jpg')
     item = models.ManyToManyField(PostItem,blank=True,related_name='item')
     page = models.CharField(max_length=16)
 
 
-# class Quotes(models.Model):
-#     quote = models.CharField(max_length=128)
-#     saidby = models.CharField(max_length=32)
-
-#     def __str__(self):
-#         return f"{self.quote} -{self.saidby}"
-
+    def __str__(self):
+        return self.title
 
 
 class AnalyzingPeople(models.Model):
@@ -42,43 +41,12 @@ class AnalyzingPeople(models.Model):
     darkside = models.CharField(max_length=256)
 
     
-# # class Meditions(UserInputs):
-# #     meditation =models.CharField(max_length=32)
-
-# # class Exercises(UserInputs):
-# #     exercise =models.CharField(max_length=32) 
-
-
-# # class CharismaTips(UserInputs):
-# #     tip =models.CharField(max_length=32) 
-
-# # class LeadershipTips(UserInputs):
-# #     leading_tip =models.CharField(max_length=32) 
-
-# # class Comrades(UserInputs):
-# #     name =models.CharField(max_length=32) 
-# #     service= models.CharField(max_length=32) 
-
-# # class ObservationStratedy(UserInputs):
-# #     stratedy =models.CharField(max_length=128)
-
-# #for love
-
-
-# #for spinningwheels
-# # class ThemesOfTheDay(models.Model):
-# #     theme= models.CharField(max_length=32)
-
-# # class SocialDare(models.Model):
-# #     dare= models.CharField(max_length=32)
-
-# # class CharacterTraits(models.Model):
-# #     charactertrait= models.CharField(max_length=32)
-
-# # class Emotions(models.Model):
-# #     emotion= models.CharField(max_length=32)
-
-# # class Visualizatoins(models.Model):
-# #     visualization= models.CharField(max_length=32)
-
-# #for activity
+class Journal(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    highlights = models.CharField(max_length=1024)
+    lowlights = models.CharField(max_length=1024)
+    emotions = models.CharField(max_length=1024)
+    knowledge = models.CharField(max_length=1024)
+    other = models.CharField(max_length=1024)
+    rating = models.IntegerField()

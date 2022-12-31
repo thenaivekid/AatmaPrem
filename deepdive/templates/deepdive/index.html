@@ -1,23 +1,47 @@
 {% extends 'deepdive/layout.html' %} 
 {% load static %}
 
+{% block title %} 
+Home
+{% endblock %}
+
 {% block body %} 
-<div class="box">
+<div id="newPost" class="textBox postForm" >
+    <h1>Create new post.</h1>
+    <form id="newPostForm">
+        Title <input type="text" id="newPostTitle" required><br><br>
+        Image URL <input type="text" id="newPostImage" required><br><br>
+        Category 
+        <select id="newPostcategory">
+            <option value="ideal">Idea</option>
+            <option value="home" selected>Home</option>
+            <option value="improvement">Improvement</option>
+            <option value="activity">Activity</option>
+          </select>
+          <br><br>
+        Description<textarea id="newPostDesc" cols="30" rows="3" required></textarea><br>
+        <button class="button" type="submit">Post</button>
+    </form>
+</div>
+
+<div class="box posts" >
     {% for post in posts %} 
         <div class="textBox">
             <h1>{{post.title}}</h1>
-            <p>{{post.desc}}</p>
+            <p>Category: {{post.page}}</p>
+            <p>Description: {{post.desc}}</p>
+            <img src="{{post.image}}" width="300" height="300">
             <div class="box2" id="items{{post.id}}">
                 {% for item in post.item.all %}
                     {% if item.completed == False %}
                     <div class="postItems" id="notCompletedItem{{post.id}}">
                         <div id="item{{item.id}}">
                             {{item.content}}
-                            <button class="button" onclick="completed('{{item.id}}')">Done</button>
+                            <button id="doneBtn{{item.id}}" class="button" onclick="completed('{{item.id}}','{{post.id}}')">Done</button>
                         </div>
                     </div>
                     {% else %}
-                    <div id="completedItem{{post.id}}">
+                    <div class="postItems" id="completedItem{{post.id}}">
                         <div>{{item.content}}
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 16.2L4.8 12L9 7.8L6.6 5.4L5.4 6.6L9 10.2L15.6 3.6L16.8 4.8L9 16.2Z" fill="#00C853"/>
