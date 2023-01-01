@@ -1,0 +1,49 @@
+{% extends 'deepdive/layout.html' %}
+{% load static %}
+{% block title %} 
+    {{post.title}}
+{% endblock %}
+
+
+{% block body %} 
+    <div class="post_details">
+        <h1>{{post.title}}</h1>
+        <p>Category: {{post.page}}</p>
+        <img
+        src="{{post.image}}" class="post_img"  onerror="this.onerror=null; this.src='https://images.pexels.com/photos/159868/lost-cat-tree-sign-fun-159868.jpeg'"/>
+
+        <p>{{post.desc}}</p>
+        
+        {% if user.is_authenticated %}
+            <div class="box2" id="items{{post.id}}">
+                {% for item in post.item.all %}
+                    {% if item.completed == False %}
+                    <div class="postItems" id="notCompletedItem{{post.id}}">
+                        <div id="item{{item.id}}">
+                            {{item.content}}
+                            <button id="doneBtn{{item.id}}" class="button" onclick="completed('{{item.id}}','{{post.id}}')">Done</button>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="postItems" id="completedItem{{post.id}}">
+                        <div>{{item.content}}
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 16.2L4.8 12L9 7.8L6.6 5.4L5.4 6.6L9 10.2L15.6 3.6L16.8 4.8L9 16.2Z" fill="#00C853"/>
+                            </svg>
+                            
+                        </div>
+                    </div>
+                    {%endif%}
+                {% endfor %}
+        
+                <div id="addbtn{{post.id}}">
+                    <button class="button" onclick="addItemForm('{{post.id}}')">add</button>
+                </div>
+            </div>
+        {% endif %} 
+        
+    </div>
+{% endblock %}
+{% block script %} 
+<script type="text/javascript" src="{% static 'deepdive/index.js' %}"></script>
+{% endblock %}

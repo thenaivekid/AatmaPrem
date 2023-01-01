@@ -1,13 +1,15 @@
 import json
+import openai
 
 from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.http import JsonResponse,HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 
 
-
+from .util import scorePerson
 from .models import Post,PostItem,AnalyzingPeople,Journal
 
 #available categories of posts
@@ -20,6 +22,13 @@ def index(request):
     })
 
 
+def post_details(request,slug):
+    post = Post.objects.get(slug=slug)
+    return render(request,"deepdive/post.html",{
+        "post":post
+    })
+
+
 @login_required
 def create_post(request):
     if request.method != "POST":
@@ -29,7 +38,7 @@ def create_post(request):
     desc = data["desc"]
     image = data["image"]
     page = data["page"]
-    Post.objects.create(title=title,desc=desc,page=page,image=image)
+    Post.objects.create(title=title,desc=desc,page=page,image=image,slug=title)
     return JsonResponse({"message": "post created successfully."})
 
 
@@ -61,8 +70,9 @@ def completed(request):
     return JsonResponse({"message":"postItem marked completed successfully."})
 
 
+@login_required
 def analyzingPeople(request):
-    people = AnalyzingPeople.objects.filter(user=request.user).all()
+    people = AnalyzingPeople.objects.filter(user=request.user).all().order_by('-score')
     return render(request,"deepdive/analyzingPeople.html",{
         "people":people,
     })
@@ -74,16 +84,30 @@ def add_analysis(request):
         return HttpResponse({"error": "POST request required."})
 
     person = request.POST["person"]
-    openness = request.POST["openness"]
-    conscientiousness = request.POST["conscientiousness"]
-    extroversion = request.POST["extroversion"]
-    agreeableness = request.POST["agreeableness"]
-    neuroticism = request.POST["neuroticism"]
+    openness = int(request.POST["openness"])
+    conscientiousness = int(request.POST["conscientiousness"])
+    extroversion = int(request.POST["extroversion"])
+    agreeableness = int(request.POST["agreeableness"])
+    neuroticism = int(request.POST["neuroticism"])
     values = request.POST["values"]
     passions = request.POST["passions"]
     similarities = request.POST["similarities"]
     importance = request.POST["importance"]
     darkside = request.POST["darkside"]
+
+    score = scorePerson(
+        openness=openness,
+        conscientiousness=conscientiousness,
+        extroversion=extroversion,
+        agreeableness=agreeableness,
+        neuroticism=neuroticism,
+        values=values,
+        passions=passions,
+        similarities=similarities,
+        importance=importance,
+        darkside=darkside 
+    )
+
     AnalyzingPeople.objects.create(
         user=request.user,
         person=person,
@@ -97,10 +121,12 @@ def add_analysis(request):
         similarities=similarities,
         importance=importance,
         darkside=darkside,
+        score=score
         )
     return redirect(reverse('analyzingPeople'))
 
 
+@login_required
 def journal(request):
     journals = Journal.objects.filter(user=request.user).all()
     return render(request,'deepdive/journal.html',{
@@ -129,3 +155,29 @@ def add_journal(request):
         rating=rating
         )
     return redirect(reverse('journal'))
+
+
+def mindfulness(request):
+    return render(request,"deepdive/mindfulness.html")
+
+
+@csrf_exempt
+def create_image(request):
+    print('hey pic')
+    if request.method != 'POST':
+        return JsonResponse({"message":"post request is required"})
+    data = json.loads(request.body)
+    query = data['query']
+    print(query)
+    n = 3
+    openai.api_key = "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"
+    response = openai.Image.create(
+    prompt=query,
+    n=n,
+    size="256x256"
+    )
+    image_url = []
+    for i in range(n):
+        image_url.append(response['data'][i]['url'])
+
+    return JsonResponse({"img0":image_url[0],"img1":image_url[1],"img2":image_url[2]})

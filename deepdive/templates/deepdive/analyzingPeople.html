@@ -32,18 +32,18 @@ AnalyzingPeople
     <div class="posts">
         {% for person in people %}
         <div class="textBox">
-            <h1>{{person.person}}</h1>
+            <h1>{{person.person}}-{{person.score}}</h1>
             <div class="box2">
-                <p>openness {{person.openness}}</p>
-                <p>conscientiousness {{person.conscientiousness}}</p>
-                <p>extroversion {{person.extroversion}}</p>
-                <p>agreeableness {{person.agreeableness}}</p>
-                <p>neuroticism {{person.neuroticism}}</p>
-                <p>values {{person.values}}</p>
-                <p>passions {{person.passions}}</p>
-                <p>similarities {{person.similarities}}</p>
-                <p>importance {{person.importance}}</p>
-                <p>darkside {{person.darkside}}</p>
+                <p>openness: {{person.openness}}</p>
+                <p>conscientiousness: {{person.conscientiousness}}</p>
+                <p>extroversion: {{person.extroversion}}</p>
+                <p>agreeableness: {{person.agreeableness}}</p>
+                <p>neuroticism: {{person.neuroticism}}</p>
+                <p>values: {{person.values}}</p>
+                <p>passions: {{person.passions}}</p>
+                <p>similarities: {{person.similarities}}</p>
+                <p>importance: {{person.importance}}</p>
+                <p>darkside: {{person.darkside}}</p>
             </div>
         </div>
         {% endfor %}

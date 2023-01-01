@@ -6,6 +6,7 @@ Home
 {% endblock %}
 
 {% block body %} 
+{% if request.user.username == 'ashok' %}
 <div id="newPost" class="textBox postForm" >
     <h1>Create new post.</h1>
     <form id="newPostForm">
@@ -13,7 +14,7 @@ Home
         Image URL <input type="text" id="newPostImage" required><br><br>
         Category 
         <select id="newPostcategory">
-            <option value="ideal">Idea</option>
+            <option value="ideal">Ideal</option>
             <option value="home" selected>Home</option>
             <option value="improvement">Improvement</option>
             <option value="activity">Activity</option>
@@ -23,48 +24,63 @@ Home
         <button class="button" type="submit">Post</button>
     </form>
 </div>
+{% endif %}
 
-<div class="box posts" >
+
+<h1 class="post_title">General</h1>
+<div class="box" id="home">
     {% for post in posts %} 
-        <div class="textBox">
-            <h1>{{post.title}}</h1>
-            <p>Category: {{post.page}}</p>
-            <p>Description: {{post.desc}}</p>
-            <img src="{{post.image}}" width="300" height="300">
-            <div class="box2" id="items{{post.id}}">
-                {% for item in post.item.all %}
-                    {% if item.completed == False %}
-                    <div class="postItems" id="notCompletedItem{{post.id}}">
-                        <div id="item{{item.id}}">
-                            {{item.content}}
-                            <button id="doneBtn{{item.id}}" class="button" onclick="completed('{{item.id}}','{{post.id}}')">Done</button>
-                        </div>
-                    </div>
-                    {% else %}
-                    <div class="postItems" id="completedItem{{post.id}}">
-                        <div>{{item.content}}
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 16.2L4.8 12L9 7.8L6.6 5.4L5.4 6.6L9 10.2L15.6 3.6L16.8 4.8L9 16.2Z" fill="#00C853"/>
-                            </svg>
-                              
-                        </div>
-                    </div>
-                    {%endif%}
-                {% endfor %}
+    {% if post.page == 'home' %}
+        <div class="textBox">          
+            <img
+            src="{{post.image}}" class="post_img"  onerror="this.onerror=null; this.src='https://images.pexels.com/photos/159868/lost-cat-tree-sign-fun-159868.jpeg'"/>
 
-                <div id="addbtn{{post.id}}">
-                    <button class="button" onclick="addItemForm('{{post.id}}')">add</button>
-                </div>
-            </div>
-            
-            
-
+            <a class="post_title" href="{% url 'post_details' slug=post.slug %}">{{ post.title }}</a>
         </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<h1 class="post_title">Ideal World</h1>
+<div class="box" id="ideal">
+    {% for post in posts %} 
+    {% if post.page == 'ideal' %}
+        <div class="textBox">            <img
+            src="{{post.image}}" class="post_img"  onerror="this.onerror=null; this.src='https://images.pexels.com/photos/159868/lost-cat-tree-sign-fun-159868.jpeg'"/>
+
+            <a class="post_title" href="{% url 'post_details' slug=post.slug %}">{{ post.title }}</a>
+        </div>
+    {% endif %}
+    {% endfor %}
+</div>
+   
+
+<h1 class="post_title">Activity </h1>
+<div class="box" id="activity">
+    {% for post in posts %} 
+    {% if post.page == 'activity' %}
+        <div class="textBox">            <img
+            src="{{post.image}}" class="post_img"  onerror="this.onerror=null; this.src='https://images.pexels.com/photos/159868/lost-cat-tree-sign-fun-159868.jpeg'"/>
+
+            <a class="post_title" href="{% url 'post_details' slug=post.slug %}">{{ post.title }}</a>
+        </div>
+    {% endif %}
     {% endfor %}
 </div>
 
 
-   
+<h1 class="post_title">Overcoming myself</h1>
+<div class="box" id="improvement">
+    {% for post in posts %} 
+    {% if post.page == 'improvement' %}
+        <div class="textBox">            <img
+            src="{{post.image}}" class="post_img"  onerror="this.onerror=null; this.src='https://images.pexels.com/photos/159868/lost-cat-tree-sign-fun-159868.jpeg'"/>
+
+            <a class="post_title" href="{% url 'post_details' slug=post.slug %}">{{ post.title }}</a>
+        </div>
+    {% endif %}
+    {% endfor %}
+</div>
 
 {% endblock %}
 

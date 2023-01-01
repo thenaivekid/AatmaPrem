@@ -1,0 +1,26 @@
+{% extends 'deepdive/layout.html' %} 
+{% load static %}
+{%block title%} 
+Mindfulness
+{%endblock%} 
+
+{%block body %} 
+    <div id="stoicQuote"></div>
+    <div id="adviceQuote"></div>
+    <hr>
+    <div id="imageCreator">
+        <h1>
+            Enter a text below, I will help you visualize stuffs.
+        </h1>
+        <form id="imageCreatorForm">
+            <input type="text" id="query" required>
+            <button type="submit" class="button">Image</button>
+        </form>
+    </div>
+
+    
+{%endblock%} 
+
+{% block script %} 
+<script type="text/javascript" src="{% static 'deepdive/mindfulness.js' %}"></script>
+{%endblock%}

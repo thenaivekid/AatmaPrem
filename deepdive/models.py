@@ -20,6 +20,7 @@ class Post(models.Model):
     image = models.CharField(max_length=128,default='https://img.freepik.com/premium-vector/king-crown-esport-logo-design_177315-269.jpg')
     item = models.ManyToManyField(PostItem,blank=True,related_name='item')
     page = models.CharField(max_length=16)
+    slug = models.SlugField(unique=True)
 
 
     def __str__(self):
@@ -39,6 +40,7 @@ class AnalyzingPeople(models.Model):
     similarities = models.CharField(max_length=256)
     importance = models.CharField(max_length=256)
     darkside = models.CharField(max_length=256)
+    score = models.IntegerField(default=0)
 
     
 class Journal(models.Model):
