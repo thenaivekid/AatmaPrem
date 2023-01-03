@@ -81,7 +81,7 @@ def register(request):
 
 
 def user(request):
-    if request.user.is_authenticate():
+    if request.user.is_authenticated:
         return render(request,"deepdive/user.html")
     return HttpResponseRedirect(reverse('register'))
 

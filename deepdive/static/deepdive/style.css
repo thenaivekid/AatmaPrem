@@ -50,8 +50,18 @@
   cursor: pointer;
   transition: all .4s ease-in-out;
   background-color:#bfeaf5;
-
+}
+  .journal{
+    margin: .6rem;
+    padding: .3rem;
+  border-radius: .5rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  border: solid black 1px;
   }
+  
   .form_container{
     width: 100%;
     display: flex;
