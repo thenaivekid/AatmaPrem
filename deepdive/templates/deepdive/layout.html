@@ -19,13 +19,13 @@
     <header class="header">
       <nav class="nav">
         <div>
-          <a href="{% url 'index' %}" class="logo"><strong>AatmaPrem</strong> </a>
+          <a href="{% url 'index' %}" class="nav_item"><strong>AatmaPrem</strong> </a>
         </div>
         
-        <div><a href="{% url 'journal' %}" class="logo">Journal</a></div>
-        <div><a href="{% url 'analyzingPeople' %}" class="logo">AnalyzePeople</a></div>
-        <div><a href="{% url 'mindfulness' %}" class="logo">Mindfulness</a></div>
-        <div><a href="users"><img src="{% static 'deepdive/user.png' %}"></a></div>
+        <div><a href="{% url 'journal' %}" class="nav_item">Journal</a></div>
+        <div><a href="{% url 'mindfulness' %}" class="nav_item">Mindfulness</a></div>
+        <div><a href="{% url 'analyzingPeople' %}" class="nav_item">AnalyzePeople</a></div>
+        <div><a href="{% url 'user' %}"><img src="{% static 'deepdive/user.png' %}"></a></div>
       </nav>
       
       
@@ -38,11 +38,6 @@
   </div>
   <footer>
     
-    <div>
-      <i class="bi bi-facebook"></i>
-      <i class="bi bi-linkedin"></i>
-      <i class="bi bi-youtube"></i>
-    </div>
 
     <div>All right reserved.</div>
   </footer>

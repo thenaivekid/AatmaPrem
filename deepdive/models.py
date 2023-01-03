@@ -42,6 +42,9 @@ class AnalyzingPeople(models.Model):
     darkside = models.CharField(max_length=256)
     score = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.person
+
     
 class Journal(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -52,3 +55,14 @@ class Journal(models.Model):
     knowledge = models.CharField(max_length=1024)
     other = models.CharField(max_length=1024)
     rating = models.IntegerField()
+
+    def __str__(self):
+        return self.date
+
+
+class ExternalLink(models.Model):
+    title = models.CharField(max_length=64)
+    link = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.title

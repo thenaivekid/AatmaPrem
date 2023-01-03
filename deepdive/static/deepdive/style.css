@@ -1,35 +1,41 @@
-/* color changed by Sadhana */
-/* by anil */
 * {
     padding: 0px;
     margin: 0px;
   }
+
   body {
     background-color:#b1c4c9;
+    padding: 5px;
+    width: 100%;
   }
 
   .box{
-    padding: 30px;
     display: flex;
     width: fit-content;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    flex-wrap: wrap;
+    width: 100%;
   }
-  
+  .box1{
+    width: 100%;
+    overflow: hidden;
+
+  }
   .nav {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
     margin-right: 0px;
-    background-color: rgb(168, 13, 13);
+    background-color: rgb(206, 98, 98);
   }
 
 
-  .logo {
+  .nav_item {
     text-decoration: none;
-    font-size: 20px;
     color: white;
-    padding: 20px;
+
   }
   
 
@@ -38,12 +44,18 @@
     padding: .3rem;
   border-radius: .5rem;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: flex-start;
   cursor: pointer;
   transition: all .4s ease-in-out;
   background-color:#bfeaf5;
 
+  }
+  .form_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
 .post_img{
@@ -130,7 +142,6 @@ footer div i:hover {
 
 
 
-/* anything below this is added by ashok */
 
 
 textarea{
@@ -138,7 +149,9 @@ border-radius: 10px;
 }
 
 .postForm{
-margin-top: 10px;margin-left: 100px;margin-right: 100px;
+  width: 100%;
+  max-width: 35rem;
+  justify-self: center;
 }
 
 .posts{
@@ -146,17 +159,8 @@ display: flex;flex-wrap: wrap;
 }
 
 .post_details{
-  padding: 20PX;
-  margin-top: 30px;
-  margin-left: 300px;
-  margin-right: 300px;
+  padding: 20px;
+
   border-radius: 0.3rem;
   background-color: #87abb3;
-}
-
-.post_details:hover {
-  box-shadow:  2px 2px 5px gray,
-            -2px -2px 5px gray;
-            transform: scale(1.08);
-
 }

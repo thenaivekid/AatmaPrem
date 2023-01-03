@@ -13,11 +13,18 @@ Mindfulness
             Enter a text below, I will help you visualize stuffs.
         </h1>
         <form id="imageCreatorForm">
-            <input type="text" id="query" required>
+            <input type="text" id="query" placeholder="What should I draw?" required>
             <button type="submit" class="button">Image</button>
         </form>
     </div>
 
+    <hr>
+    <div id="links">
+        <h1>Here are some external links.</h1>
+        {% for link in links %} 
+            <div><a href="{{link.link}}" target="_blank">{{link.title}}</a></div>
+        {% endfor %}
+    </div>
     
 {%endblock%} 
 

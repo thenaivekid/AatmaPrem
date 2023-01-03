@@ -7,6 +7,7 @@ Home
 
 {% block body %} 
 {% if request.user.username == 'ashok' %}
+<div class="form_container">
 <div id="newPost" class="textBox postForm" >
     <h1>Create new post.</h1>
     <form id="newPostForm">
@@ -23,6 +24,7 @@ Home
         Description<textarea id="newPostDesc" cols="30" rows="3" required></textarea><br>
         <button class="button" type="submit">Post</button>
     </form>
+</div>
 </div>
 {% endif %}
 

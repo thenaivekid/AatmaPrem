@@ -1,0 +1,17 @@
+{% extends 'deepdive/layout.html' %}
+{% block title %} 
+User
+{% endblock %}
+
+{% block body %}
+<h1>Welcome, {{ request.user.first_name }}</h1>
+
+<ul>
+    <li> First Name: {{ request.user.first_name  }}</li>
+    <li> Last Name: {{ request.user.last_name  }}</li>
+    <li>Userame: {{ request.user.username  }}</li>
+    <li>Email: {{request.user.email}} </li>
+</ul>
+
+<h3><a href="{% url 'logout' %}">Logout</a></h3>
+{% endblock %}
